@@ -1,1 +1,1 @@
-# dintagram
+# dinstagram
