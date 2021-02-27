@@ -1,6 +1,6 @@
 using System;
 
-namespace Dinstagram
+namespace API
 {
     public class WeatherForecast
     {
