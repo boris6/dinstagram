@@ -6,6 +6,7 @@ namespace Domain
     public class Post
     {
         public Guid PostId { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Timestamp { get; set; }
         public Guid UserId { get; set; }
