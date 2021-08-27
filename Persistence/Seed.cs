@@ -10,59 +10,66 @@ namespace Persistence
     {
         public static async Task SeedData(DataContext context)
         {
-            var userId = Guid.NewGuid();
-            var postId = Guid.NewGuid();
-            var sampleText =
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
-
             if (context.Users.Any() && context.Posts.Any() && context.PostDetails.Any()) return;
-            var user = new User
-            {
-                UserId = userId,
-                Email = "test@test.com",
-                FullName = "Test Test",
-                Password = "testpass",
-                Username = "testuser"
-            };
-            await context.Users.AddAsync(user);
 
-            var post = new Post
+            for (var i = 0; i < 5; i++)
             {
-                Description = sampleText,
-                PostId = postId,
-                Timestamp = DateTime.Now,
-                UserId = userId
-            };
-            await context.Posts.AddAsync(post);
+                var userId = Guid.NewGuid();
+                var postId = Guid.NewGuid();
+                var sampleText =
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
 
-            var postDetails = new List<PostDetail>
-            {
-                new()
+
+                var user = new User
                 {
-                    PostDetailId = Guid.NewGuid(),
-                    PostId = postId,
-                    Description = sampleText
-                },
-                new()
+                    UserId = userId,
+                    Email = "test@test.com",
+                    FullName = "Test Test",
+                    Password = "testpass",
+                    Username = "testuser"
+                };
+                await context.Users.AddAsync(user);
+
+                var post = new Post
                 {
-                    PostDetailId = Guid.NewGuid(),
+                    Description = sampleText,
                     PostId = postId,
-                    Description = sampleText
-                },
-                new()
+                    Timestamp = DateTime.Now,
+                    UserId = userId,
+                    Title = "Sample text"
+                };
+                await context.Posts.AddAsync(post);
+
+                var postDetails = new List<PostDetail>
                 {
-                    PostDetailId = Guid.NewGuid(),
-                    PostId = postId,
-                    Description = sampleText
-                },
-                new()
-                {
-                    PostDetailId = Guid.NewGuid(),
-                    PostId = postId,
-                    Description = sampleText
-                }
-            };
-            await context.PostDetails.AddRangeAsync(postDetails);
+                    new()
+                    {
+                        PostDetailId = Guid.NewGuid(),
+                        PostId = postId,
+                        Description = sampleText
+                    },
+                    new()
+                    {
+                        PostDetailId = Guid.NewGuid(),
+                        PostId = postId,
+                        Description = sampleText
+                    },
+                    new()
+                    {
+                        PostDetailId = Guid.NewGuid(),
+                        PostId = postId,
+                        Description = sampleText
+                    },
+                    new()
+                    {
+                        PostDetailId = Guid.NewGuid(),
+                        PostId = postId,
+                        Description = sampleText
+                    }
+                };
+                await context.PostDetails.AddRangeAsync(postDetails);
+            }
+
             await context.SaveChangesAsync();
         }
     }
